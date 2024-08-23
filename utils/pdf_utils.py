@@ -1,6 +1,9 @@
 import fitz
 import os
 
+def allowed_file(filename, allowed_extensions):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+
 def pdf_to_images(pdf_path, output_folder, file_name='test', image_format='png'):
     """
     docstring
