@@ -1,3 +1,9 @@
+## Data files
+*.pdf
+*.jpg
+*.png
+*.jpeg
+
 ### Flask ###
 instance/*
 !instance/.gitignore
