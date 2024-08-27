@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from werkzeug.utils import secure_filename
 import os
 import logging
@@ -16,7 +16,7 @@ logging.basicConfig(filename='app.log', level=logging.ERROR,
 
 @app.route('/')
 def index():
-    return 'App Created'
+    return render_template('index.html')
 
 @app.route('/convert_pdf', methods=['POST'])
 def convert_pdf():

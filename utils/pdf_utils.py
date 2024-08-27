@@ -3,7 +3,7 @@ import os
 import logging
 
 # Configure logging
-logging.basicConfig(filename='pdf_utils.log', level=logging.ERROR,
+logging.basicConfig(filename='app.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 def allowed_file(filename, allowed_extensions):
@@ -27,10 +27,18 @@ def pdf_to_images(pdf_path, output_folder, file_name='test', image_format='png')
     os.makedirs(subfolder_path, exist_ok=True)
     print(subfolder_path + '\n')
 
+    # Calculate the scale factor based on DPI
+    # dpi = 500
+    # zoom_x = dpi / 72  # 72 is the default DPI of PDF
+    # zoom_y = dpi / 72
+    # matrix = fitz.Matrix(zoom_x, zoom_y)
+
     for page_num in range(total_pages):
         try:
             page = pdf_document[page_num]
-            pix = page.get_pixmap()
+            pix = page.get_pixmap(dpi=500)
+            # pix = page.get_pixmap(matrix=matrix)
+
             output_image_path = os.path.join(subfolder_path, f'page_{page_num + 1}.{image_format}')
             pix.save(output_image_path)
             image_paths.append(output_image_path)
