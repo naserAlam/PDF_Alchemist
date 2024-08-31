@@ -1,6 +1,7 @@
 import fitz
 import os
 import logging
+import time
 
 # Configure logging
 logging.basicConfig(filename='app.log', level=logging.ERROR,
@@ -33,6 +34,7 @@ def pdf_to_images(pdf_path, output_folder, file_name='test', image_format='png')
     # zoom_y = dpi / 72
     # matrix = fitz.Matrix(zoom_x, zoom_y)
 
+    start_time = time.time()
     for page_num in range(total_pages):
         try:
             page = pdf_document[page_num]
@@ -44,5 +46,7 @@ def pdf_to_images(pdf_path, output_folder, file_name='test', image_format='png')
             image_paths.append(output_image_path)
         except Exception as e:
             logging.error(f'Error processing page {page_num + 1} of PDF file {pdf_path}: {e}')
-
+    print(f'Execution time: {time.time() - start_time}')
+    logging.info(f'Converted {file_name} successfully.')
+    print(f'Converted {file_name} successfully.')
     return image_paths
